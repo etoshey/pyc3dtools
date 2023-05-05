@@ -1,7 +1,7 @@
 # pyc3dtools
-This is python package that you can use it to read your c3d file. Actually, this is an C3Dtools.com API.
-The C3Dtools.com is a free web-based biomechanical toolbox.
-On C3Dtools.com you can :
+This is python package that you can use it to read your c3d file. Actually, this is an [C3Dtools.com](https://c3dtools.com) API.
+The [C3Dtools.com](https://c3dtools.com) is a free web-based biomechanical toolbox.
+On [C3Dtools.com](https://c3dtools.com) you can :
 
         - Lower Body Inverse Kinematic - Plug-in Gait Model NEW
         - Convert C3D file to ASCII and create .TRC and .MOT that is compatible with the Opensim
@@ -22,8 +22,7 @@ pip install pyc3dtools
 
 
 # Usage
-
-First of all, create an account on c3dtools.com/register and then login to your account you can find API token on the home page
+First of all, create an account ([Register](c3dtools.com/register)) and then log in to your account, you can find the API token on the home page
 
 ![Reference Image](/img/token.PNG)
 
