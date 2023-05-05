@@ -22,10 +22,7 @@ pip install pyc3dtools
 
 
 # Usage
-First of all, create an account ([Register](c3dtools.com/register)) and then log in to your account, you can find the API token on the home page
-
-![Reference Image](/img/token.PNG)
-
+First of all, create an account ([Register](https://c3dtools.com/register)) and then log in to your account, you can find the API token on the home page
 
 and then import pyc3dtools package
 ```python
