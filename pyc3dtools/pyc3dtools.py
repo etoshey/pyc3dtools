@@ -5,8 +5,8 @@ from tqdm import tqdm
 from tqdm.utils import CallbackIOWrapper
 
 #API URL
-#API_URL = "http://c3dtools.com/API/readC3D"
-API_URL = "http://localhost:5001/API/readC3D"
+API_URL = "http://c3dtools.com/API/readC3D"
+#API_URL = "http://localhost:5001/API/readC3D"
 
 def readC3D(Token,file_path): 
 
