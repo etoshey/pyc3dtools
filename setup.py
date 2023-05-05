@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.1.1'
+VERSION = '0.1.2'
 DESCRIPTION = 'C3Dtools API package - Read c3d files'
 
 with open("README.md", "r") as fh:
@@ -16,7 +16,7 @@ setup(
     description=DESCRIPTION,
     long_description=long_description,
     long_description_content_type="text/markdown",
-    install_requires=['numpy','tqdm'],    
+    install_requires=['numpy','tqdm','requests'],    
     keywords=['python', 'c3d', 'motion capture', 'biomechanics'],
     license="MIT",
     classifiers=[

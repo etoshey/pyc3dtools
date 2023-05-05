@@ -5,7 +5,7 @@ from tqdm import tqdm
 from tqdm.utils import CallbackIOWrapper
 
 #API URL
-API_URL = "http://c3dtools.com/API/readC3D"
+API_URL = "https://c3dtools.com/API/readC3D"
 #API_URL = "http://localhost:5001/API/readC3D"
 
 def readC3D(Token,file_path): 
@@ -38,6 +38,10 @@ def readC3D(Token,file_path):
             Real_Markers = np.array(Point)
             Real_Markers = Real_Markers[:,Real_marker_index,:]
             result["Markers"] = Real_Markers
+
+
+            # COP :: null to 0
+            Forceplates
 
 
             # List of Markers Label
@@ -81,8 +85,7 @@ def readC3D(Token,file_path):
 
             ## SORRY :)
             for f in Forceplates:
-                 f['Origin'] = f['orgin']
-            
+                 f['Origin'] = f['orgin']            
 
             return({
                 'GP' : GP,

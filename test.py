@@ -58,3 +58,5 @@ COP_Y = COP_Y.flatten()
 plt.plot(COP_X, color='g', label='copX')
 plt.plot(COP_Y, color='b', label='copY')
 plt.show()
+
+print('OK')
