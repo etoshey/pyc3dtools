@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.1.2'
+VERSION = '0.2.1'
 DESCRIPTION = 'C3Dtools API package - Read c3d files'
 
 with open("README.md", "r") as fh:
@@ -27,5 +27,6 @@ setup(
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: Microsoft :: Windows",
     ],
-    url="https://github.com/etoshey/pyc3dtools"
+    url="https://github.com/etoshey/pyc3dtools",
+    packages=find_packages(exclude=("exportData",))
 )

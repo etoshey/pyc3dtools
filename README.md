@@ -148,4 +148,23 @@ plt.show()
 ```
 
 
+# Export .mot and .trc
+If you need to convert your c3d file to compatible files for OpenSim software you can use *getTRCMot* function. This function returns all c3d file data and also write .mot and .trc file in a directory
+
+```python
+import pyc3dtools
+TOKEN = "YOUR_TOKEN"
+#result =  pyc3dtools.getTRCMot(TOKEN,'Input C3D File','Destination directory')
+result =  pyc3dtools.getTRCMot(TOKEN,'TYPE-2.C3D','./exportData')
+```
+
+## Export .mot and .trc Sample code
+```python
+import pyc3dtools
+TOKEN = "YOUR_TOKEN"
+result =  pyc3dtools.getTRCMot(TOKEN,'TYPE-2.C3D','./exportData')
+if result['Status'] == 'Success':
+    print('Done.')
+```
+
 
