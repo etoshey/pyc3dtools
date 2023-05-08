@@ -1,7 +1,5 @@
-# pyc3dtools - 
-### Mahsa
-
-This is python package that you can use it to read your c3d file. Actually, this is an [C3Dtools.com](https://c3dtools.com) API. I called it <span style="color:red"> *MAHSA*</span>
+# pyc3dtools 
+This is python package that you can use it to read your c3d file. Actually, this is an [C3Dtools.com](https://c3dtools.com) API. I called it - **MAHSA**
 The [C3Dtools.com](https://c3dtools.com) is a free web-based biomechanical toolbox.
 On [C3Dtools.com](https://c3dtools.com) you can :
 
