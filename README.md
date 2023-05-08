@@ -28,7 +28,7 @@ and then import pyc3dtools package
 ```python
 import pyc3dtools
 ```
-Finally pass the API token and your file path to the readC3D function as an input,
+Finally pass the API token and your file path to the readC3D function as inputs,
 ```python
 c3d =  pyc3dtools.readC3D(TOKEN,'TYPE-2.C3D')
 ```
