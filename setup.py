@@ -1,10 +1,11 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.2.1'
+VERSION = '0.2.2'
 DESCRIPTION = 'C3Dtools API package - Read c3d files'
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
+
 
 
 # Setting up

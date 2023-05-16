@@ -7,7 +7,8 @@ from tqdm.utils import CallbackIOWrapper
 
 def readC3D(Token,file_path): 
 
-    API_URL = "https://c3dtools.com/API/readC3D"
+    API_URL = "https://c3dtools.com/API/readC3D"   
+
     data = {'api_key':Token}  
 
     #r = requests.post(url = API_URL, files=file, data = data)    
@@ -129,9 +130,13 @@ def GenerateOutput(result):
     Analog_lbl = GP[gp_analog_lbl_i]['List_Parameters'][gp_analog_lbl_ii]['Param_data']
 
 
-    ## SORRY :)
+   
     for f in Forceplates:
-            f['Origin'] = f['orgin']            
+            f['Origin'] = f['orgin']     ## SORRY :)
+            f['COP'] = np.array(f['COP'][:][:])
+            f['GRF_VECTOR'] = np.array(f['GRF_VECTOR'][:][:])           
+
+            
 
     return({
         'Status' : 'Success',
@@ -146,3 +151,10 @@ def GenerateOutput(result):
         'Units' : Markers_Units,
         'Coordinate system' : [Markers_XSCREEN ,Markers_YSCREEN]
     })
+
+
+
+
+
+
+
