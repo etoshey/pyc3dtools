@@ -133,8 +133,8 @@ def GenerateOutput(result):
    
     for f in Forceplates:
             f['Origin'] = f['orgin']     ## SORRY :)
-            f['COP'] = np.array(f['COP'][:][:])
-            f['GRF_VECTOR'] = np.array(f['GRF_VECTOR'][:][:])           
+            f['COP'] = np.array(f['COP'][:][:], dtype=object)
+            f['GRF_VECTOR'] = np.array(f['GRF_VECTOR'][:][:], dtype=object)           
 
             
 
