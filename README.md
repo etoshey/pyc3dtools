@@ -206,6 +206,12 @@ for i in range(NumFrames):
 Analog_Label = result['Analog Label']
 Analog_Data = result['Analog']
 
+ch0 = Analog_Data[:,:,0]
+ch1 = Analog_Data[:,:,1]
+ch2 = Analog_Data[:,:,2]
+
+
+
 
 plt.show()
 

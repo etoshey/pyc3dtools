@@ -149,7 +149,7 @@ def GenerateOutput(result):
 
         NewAnalog.append(main_row)    
 
-    Analog = NewAnalog
+    Analog = np.array(NewAnalog)
 
 
     return({
