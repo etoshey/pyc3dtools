@@ -89,13 +89,19 @@ Zcop_frame_50_1 = c3d['ForcePlate'][0]['COP'][50][2][1]
 
 # Sample
 ```python
+
+import sys
 import pyc3dtools
 import matplotlib.pyplot as plt
 import numpy as np
 
-TOKEN = "YOUR_TOKEN"
+TOKEN = "YOUR TOKEN"
 
 result =  pyc3dtools.readC3D(TOKEN,'TYPE-2.C3D')
+
+if result['Status']=='Failed':
+  print(f"Failed to Read File... | {result['error']}") 
+  sys.exit(0)
 
 print('---------------------------- C3Dtools.Com ----------------------------')
 print(f"Header::Number of Markers = {result['Header']['Number_of_Points']}")
@@ -128,27 +134,83 @@ print(f"First plate:: COP :: X,Y,Z :: Frame->50 :: Analog Sample 1 = {result['Fo
 
 #plot data
 Marker1 = result['Markers'][:,1,:3]
-plt.plot(Marker1[:,0], color='r', label='X')
-plt.plot(Marker1[:,1], color='g', label='Y')
-plt.plot(Marker1[:,2], color='b', label='Z')
-plt.show()
 
 FZ = np.array(result['ForcePlate'][0]['FZ'])
 FZ = FZ.flatten()
-plt.plot(FZ)
-plt.show()
 
 
-COP = np.array(result['ForcePlate'][0]['COP'][:][:])
+COP = result['ForcePlate'][0]['COP'][:,:,:]
 COP_X = COP[:,0,:]
 COP_Y = COP[:,1,:]
 COP_X = COP_X.flatten()
 COP_Y = COP_Y.flatten()
 
 
-plt.plot(COP_X, color='g', label='copX')
-plt.plot(COP_Y, color='b', label='copY')
+Vec_GRF = result['ForcePlate'][0]['GRF_VECTOR'][:,:,:]
+Vec_GRF_X = Vec_GRF[:,0,:]
+Vec_GRF_Y = Vec_GRF[:,1,:]
+Vec_GRF_Z = Vec_GRF[:,2,:]
+Vec_GRF_X = Vec_GRF_X.flatten()
+Vec_GRF_Y = Vec_GRF_Y.flatten()
+Vec_GRF_Z = Vec_GRF_Z.flatten()
+
+
+fig = plt.figure()
+axs = fig.subplots(2, 2)
+axs[0, 0].plot(Marker1[:,0], color='r', label='X')
+axs[0, 0].plot(Marker1[:,1], color='g', label='Y')
+axs[0, 0].plot(Marker1[:,2], color='b', label='Z')
+axs[0, 0].set_title('Marker Position')
+axs[0, 1].plot(FZ, 'tab:orange')
+axs[0, 1].set_title('GRF Z')
+axs[1, 0].plot(COP_X, color='g', label='copX')
+axs[1, 0].plot(COP_Y, color='b', label='copY')
+axs[1, 0].set_title('COP')
+axs[1, 1].plot(Vec_GRF_X, color='g', label='GRFX')
+axs[1, 1].plot(Vec_GRF_Y, color='b', label='GRFY')
+axs[1, 1].plot(Vec_GRF_Z, color='r', label='GRFZ')
+axs[1, 1].set_title('GRF vector')
+
+
+
+
+NumFrames = result['Header']['last_frame'] - result['Header']['first_frame']
+
+Forceplates = result['ForcePlate']
+cop_data = []
+grf_vector = []
+corners = []
+for fp in Forceplates:  
+  #COP 
+  cop_data.append(fp['COP'])
+  #GRF
+  grf_vector.append(fp['GRF_VECTOR'])
+  #Corners
+  for c in range(4):    
+    corners.extend(fp['corners'])
+
+
+
+# COP & GRF
+main_cop_data =[]
+main_grf_data =[]
+
+for i in range(NumFrames):   
+  for fp in range(len(Forceplates)):
+    main_cop_data.append([cop_data[fp][i,0,0] , cop_data[fp][i,1,0]])
+    main_grf_data.append([grf_vector[fp][i,0,0] , grf_vector[fp][i,1,0], grf_vector[fp][i,2,0]])  
+
+
+
+# Get Analog data
+Analog_Label = result['Analog Label']
+Analog_Data = result['Analog']
+
+
 plt.show()
+
+print('OK')
+
 ```
 
 

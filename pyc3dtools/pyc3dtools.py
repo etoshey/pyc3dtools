@@ -30,11 +30,9 @@ def readC3D(Token,file_path):
             return GenerateOutput(result)
             
             
-    except:
-            return({
-                'error' : 'Failed'
-            })
-
+    except Exception as e:
+        return({'Status' : 'Failed',
+                'error' : e  })
     
 def getTRCMot(Token,file_path,des_path):          
     API_URL = "https://c3dtools.com/API/getOpenSimData"
@@ -74,8 +72,9 @@ def getTRCMot(Token,file_path,des_path):
 
             return GenerateOutput(result['c3d'])
       
-    except:
-        return({'Status' : 'Failed'  })
+    except Exception as e:
+        return({'Status' : 'Failed',
+                'error' : e  })
 
             
 
@@ -136,7 +135,22 @@ def GenerateOutput(result):
             f['COP'] = np.array(f['COP'][:][:], dtype=object)
             f['GRF_VECTOR'] = np.array(f['GRF_VECTOR'][:][:], dtype=object)           
 
-            
+    
+    # convert all analog data to np array
+    Analog = np.array(Analog)
+    NewAnalog =[]
+    for f in Analog:
+        main_row = []
+        for j in range(int((len(f)/len(Analog_lbl)))-1):
+            row = []
+            for k in range(j*len(Analog_lbl),(j+1)*len(Analog_lbl)):
+                row.append(f[k])
+            main_row.append(row)
+
+        NewAnalog.append(main_row)    
+
+    Analog = NewAnalog
+
 
     return({
         'Status' : 'Success',
