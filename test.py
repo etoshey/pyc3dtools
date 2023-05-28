@@ -1,10 +1,15 @@
+import sys
 import pyc3dtools
 import matplotlib.pyplot as plt
 import numpy as np
 
-TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjU4NTM0NDg3NzQ2MDM0IiwiaWF0IjoxNjc5OTE4NDY1LCJleHAiOjE2Nzk5MjIwNjV9.IDZAmMoneWqw6rjlmpl15ZpjbgDjtQFhYwI_iy1uX6E"
+TOKEN = "YOUR TOKEN"
 
 result =  pyc3dtools.readC3D(TOKEN,'TYPE-2.C3D')
+
+if result['Status']=='Failed':
+  print(f"Failed to Read File... | {result['error']}") 
+  sys.exit(0)
 
 print('---------------------------- C3Dtools.Com ----------------------------')
 print(f"Header::Number of Markers = {result['Header']['Number_of_Points']}")
@@ -58,8 +63,8 @@ Vec_GRF_Y = Vec_GRF_Y.flatten()
 Vec_GRF_Z = Vec_GRF_Z.flatten()
 
 
-
-fig, axs = plt.subplots(2, 2)
+fig = plt.figure()
+axs = fig.subplots(2, 2)
 axs[0, 0].plot(Marker1[:,0], color='r', label='X')
 axs[0, 0].plot(Marker1[:,1], color='g', label='Y')
 axs[0, 0].plot(Marker1[:,2], color='b', label='Z')
@@ -75,7 +80,6 @@ axs[1, 1].plot(Vec_GRF_Z, color='r', label='GRFZ')
 axs[1, 1].set_title('GRF vector')
 
 
-print('OK')
 
 
 NumFrames = result['Header']['last_frame'] - result['Header']['first_frame']
@@ -105,5 +109,12 @@ for i in range(NumFrames):
     main_grf_data.append([grf_vector[fp][i,0,0] , grf_vector[fp][i,1,0], grf_vector[fp][i,2,0]])  
 
 
+
+# Get Analog data
+Analog_Label = result['Analog Label']
+Analog_Data = result['Analog']
+
+
+plt.show()
 
 print('OK')
