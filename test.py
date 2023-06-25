@@ -5,7 +5,7 @@ import numpy as np
 
 TOKEN = "YOUR TOKEN"
 
-result =  pyc3dtools.readC3D(TOKEN,'TYPE-2.C3D')
+result =  pyc3dtools.readC3D(TOKEN,'EMG Data Cometa.C3D')
 
 if result['Status']=='Failed':
   print(f"Failed to Read File... | {result['error']}") 

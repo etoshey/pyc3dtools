@@ -88,68 +88,78 @@ def GenerateOutput(result):
     Header = result["Header"]
     Forceplates = result["Forceplate_list"]
     Real_Markers = np.array(Point)
-    Real_Markers = Real_Markers[:,Real_marker_index,:]
-    result["Markers"] = Real_Markers
+    Markers_lbl = []
+    Analog_lbl = []
+    Markers_Units = ''
+    Markers_XSCREEN = ''
+    Markers_YSCREEN = ''
 
-    # List of Markers Label
-    gp_point_lbl_i = [
-        index for index in range(len(GP))
-        if GP[index]['Group_Name'] == 'POINT'
-    ][0]    
-    gp_point_lbl_ii = [
-        index for index in range(len(GP[gp_point_lbl_i]['List_Parameters']))
-        if GP[gp_point_lbl_i]['List_Parameters'][index]['Param_Name'] == 'LABELS'
-    ][0] 
-    gp_point_unit_i = [
-        index for index in range(len(GP[gp_point_lbl_i]['List_Parameters']))
-        if GP[gp_point_lbl_i]['List_Parameters'][index]['Param_Name'] == 'UNITS'
-    ][0] 
-    gp_point_Yscreen_i = [
-        index for index in range(len(GP[gp_point_lbl_i]['List_Parameters']))
-        if GP[gp_point_lbl_i]['List_Parameters'][index]['Param_Name'] == 'Y_SCREEN'
-    ][0] 
-    gp_point_Xscreen_i = [
-        index for index in range(len(GP[gp_point_lbl_i]['List_Parameters']))
-        if GP[gp_point_lbl_i]['List_Parameters'][index]['Param_Name'] == 'X_SCREEN'
-    ][0] 
-    Markers_lbl = GP[gp_point_lbl_i]['List_Parameters'][gp_point_lbl_ii]['Param_data']
-    Markers_Units = GP[gp_point_lbl_i]['List_Parameters'][gp_point_unit_i]['Param_data'][0]
-    Markers_YSCREEN = GP[gp_point_lbl_i]['List_Parameters'][gp_point_Yscreen_i]['Param_data'][0]
-    Markers_XSCREEN = GP[gp_point_lbl_i]['List_Parameters'][gp_point_Xscreen_i]['Param_data'][0]
+
+    if len(Point[0]) > 0 :
+        Real_Markers = Real_Markers[:,Real_marker_index,:]
+        result["Markers"] = Real_Markers
+
+        # List of Markers Label
+        gp_point_lbl_i = [
+            index for index in range(len(GP))
+            if GP[index]['Group_Name'] == 'POINT'
+        ][0]    
+        gp_point_lbl_ii = [
+            index for index in range(len(GP[gp_point_lbl_i]['List_Parameters']))
+            if GP[gp_point_lbl_i]['List_Parameters'][index]['Param_Name'] == 'LABELS'
+        ][0] 
+        gp_point_unit_i = [
+            index for index in range(len(GP[gp_point_lbl_i]['List_Parameters']))
+            if GP[gp_point_lbl_i]['List_Parameters'][index]['Param_Name'] == 'UNITS'
+        ][0] 
+        gp_point_Yscreen_i = [
+            index for index in range(len(GP[gp_point_lbl_i]['List_Parameters']))
+            if GP[gp_point_lbl_i]['List_Parameters'][index]['Param_Name'] == 'Y_SCREEN'
+        ][0] 
+        gp_point_Xscreen_i = [
+            index for index in range(len(GP[gp_point_lbl_i]['List_Parameters']))
+            if GP[gp_point_lbl_i]['List_Parameters'][index]['Param_Name'] == 'X_SCREEN'
+        ][0] 
+        Markers_lbl = GP[gp_point_lbl_i]['List_Parameters'][gp_point_lbl_ii]['Param_data']
+        Markers_Units = GP[gp_point_lbl_i]['List_Parameters'][gp_point_unit_i]['Param_data'][0]
+        Markers_YSCREEN = GP[gp_point_lbl_i]['List_Parameters'][gp_point_Yscreen_i]['Param_data'][0]
+        Markers_XSCREEN = GP[gp_point_lbl_i]['List_Parameters'][gp_point_Xscreen_i]['Param_data'][0]
+    
 
     #List of Analog channel Label
-    gp_analog_lbl_i = [
-        index for index in range(len(GP))
-        if GP[index]['Group_Name'] == 'ANALOG'
-    ][0]    
-    gp_analog_lbl_ii = [
-        index for index in range(len(GP[gp_analog_lbl_i]['List_Parameters']))
-        if GP[gp_analog_lbl_i]['List_Parameters'][index]['Param_Name'] == 'LABELS'
-    ][0] 
-    Analog_lbl = GP[gp_analog_lbl_i]['List_Parameters'][gp_analog_lbl_ii]['Param_data']
+    if len(Analog[0]) > 0 :
+        gp_analog_lbl_i = [
+            index for index in range(len(GP))
+            if GP[index]['Group_Name'] == 'ANALOG'
+        ][0]    
+        gp_analog_lbl_ii = [
+            index for index in range(len(GP[gp_analog_lbl_i]['List_Parameters']))
+            if GP[gp_analog_lbl_i]['List_Parameters'][index]['Param_Name'] == 'LABELS'
+        ][0] 
+        Analog_lbl = GP[gp_analog_lbl_i]['List_Parameters'][gp_analog_lbl_ii]['Param_data']
 
-
-   
-    for f in Forceplates:
-            f['Origin'] = f['orgin']     ## SORRY :)
-            f['COP'] = np.array(f['COP'][:][:], dtype=object)
-            f['GRF_VECTOR'] = np.array(f['GRF_VECTOR'][:][:], dtype=object)           
 
     
-    # convert all analog data to np array
-    Analog = np.array(Analog)
-    NewAnalog =[]
-    for f in Analog:
-        main_row = []
-        for j in range(int((len(f)/len(Analog_lbl)))-1):
-            row = []
-            for k in range(j*len(Analog_lbl),(j+1)*len(Analog_lbl)):
-                row.append(f[k])
-            main_row.append(row)
+        for f in Forceplates:
+                f['Origin'] = f['orgin']     ## SORRY :)
+                f['COP'] = np.array(f['COP'][:][:], dtype=object)
+                f['GRF_VECTOR'] = np.array(f['GRF_VECTOR'][:][:], dtype=object)           
 
-        NewAnalog.append(main_row)    
+        
+        # convert all analog data to np array
+        Analog = np.array(Analog)
+        NewAnalog =[]
+        for f in Analog:
+            main_row = []
+            for j in range(int((len(f)/len(Analog_lbl)))-1):
+                row = []
+                for k in range(j*len(Analog_lbl),(j+1)*len(Analog_lbl)):
+                    row.append(f[k])
+                main_row.append(row)
 
-    Analog = np.array(NewAnalog)
+            NewAnalog.append(main_row)    
+
+        Analog = np.array(NewAnalog)
 
 
     return({
