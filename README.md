@@ -342,8 +342,9 @@ if result['Status'] == 'Success':
     plt.show()    
 
 ```
-## Inverse Kinematic Graph
-![alt text](http://url/to/img.png)
+## Inverse Kinematic Sample Output
+![C3Dtools](https://github.com/etoshey/pyc3dtools/blob/da4f2fd2220088b04a6435c8667d12b5370fd10d/Test/IK%20result.png)
+
 
 
 ```diff
