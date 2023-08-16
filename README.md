@@ -240,6 +240,110 @@ if result['Status'] == 'Success':
 ```
 
 
+# Inverse Kinematic : Plug-in Gait
+By this API can compute the joint's kinematics. Just pass a static trial, a dynamic trial and anthropometry data of your subject.
+
+```python
+import pyc3dtools
+import matplotlib.pyplot as plt
+import numpy as np
+
+TOKEN = "YOUR TOKEN"
+
+Anthropometry = [('Left_Leg_Length',800), # mm
+                  ('Right_Leg_Length',800),
+                  ('Knee_Width',100),
+                  ('Ankle_Width',90),
+                  ('Marker_Radius',14)]
+
+
+Markers_label = [('LASI','LASI'), # (Fixed label , your label in c3d file)
+                 ('RASI','RASI'), # (Fixed label , your label in c3d file)
+                 ('LPSI','LPSI'), # (Fixed label , your label in c3d file)
+                 ('RPSI','RPSI'), # (Fixed label , your label in c3d file)
+                 #('SACR','SACR'), # (Fixed label , your label in c3d file) - Optional
+                 ('LTHI','LTHI'), # (Fixed label , your label in c3d file)
+                 ('RTHI','RTHI'), # (Fixed label , your label in c3d file)
+                 ('LKNE','LKNE'), # (Fixed label , your label in c3d file)
+                 ('RKNE','RKNE'), # (Fixed label , your label in c3d file)
+                 ('LTIB','LTIB'), # (Fixed label , your label in c3d file)
+                 ('RTIB','RTIB'), # (Fixed label , your label in c3d file)
+                 ('LANK','LANK'), # (Fixed label , your label in c3d file)
+                 ('RANK','RANK'), # (Fixed label , your label in c3d file)
+                 ('LHEE','LHEE'), # (Fixed label , your label in c3d file)
+                 ('RHEE','RHEE'), # (Fixed label , your label in c3d file)
+                 ('LTOE','LTOE'), # (Fixed label , your label in c3d file)
+                 ('RTOE','RTOE')] # (Fixed label , your label in c3d file)
+
+
+#pyc3dtools.IKPiG(TOKEN, Static Trial,Dynamic Trial, Markers_label,Anthropometry,[start Frame, end Frame] *Optional)
+result =  pyc3dtools.IKPiG(TOKEN,'Cal 01.C3D','Walking 01.C3D',Markers_label,Anthropometry)
+
+
+
+if result['Status'] == 'Success':
+    print('Done.')
+    t = np.arange(0,len(result['IK_Result'][0]['angle']))  
+
+    fig, axs = plt.subplots(3, 2)
+    # HIP Joint
+    LHIP = next((obj for obj in result['IK_Result'] if obj['name'] == 'LHIP'),  None)
+    RHIP = next((obj for obj in result['IK_Result'] if obj['name'] == 'RHIP'),  None)
+    LHIP_angle_x = [item[0] for item in LHIP['angle']]
+    LHIP_angle_y = [item[1] for item in LHIP['angle']]
+    LHIP_angle_z = [item[2] for item in LHIP['angle']]
+    axs[0,0].plot(t,LHIP_angle_x,t,LHIP_angle_y,t,LHIP_angle_z)
+    axs[0,0].legend(['Flex/Ext','Abd/Add','Ex/Int Rotation'])
+    axs[0,0].set_ylabel('Left HIP')
+
+    RHIP_angle_x = [item[0] for item in RHIP['angle']]
+    RHIP_angle_y = [item[1] for item in RHIP['angle']]
+    RHIP_angle_z = [item[2] for item in RHIP['angle']]     
+    axs[0,1].plot(t,RHIP_angle_x,t,RHIP_angle_y,t,RHIP_angle_z)
+    axs[0,1].legend(['Flex/Ext','Abd/Add','Ex/Int Rotation'])
+    axs[0,1].set_ylabel('Right HIP')
+
+    # KNEE Joint
+    LKNEE = next((obj for obj in result['IK_Result'] if obj['name'] == 'LKNEE'),  None)
+    RKNEE = next((obj for obj in result['IK_Result'] if obj['name'] == 'RKNEE'),  None)
+    LKNEE_angle_x = [item[0] for item in LKNEE['angle']]
+    LKNEE_angle_y = [item[1] for item in LKNEE['angle']]
+    LKNEE_angle_z = [item[2] for item in LKNEE['angle']]
+    axs[1,0].plot(t,LKNEE_angle_x,t,LKNEE_angle_y,t,LKNEE_angle_z)
+    axs[1,0].legend(['Flex/Ext','Abd/Add','Ex/Int Rotation'])
+    axs[1,0].set_ylabel('Left Knee')
+
+    RKNEE_angle_x = [item[0] for item in RKNEE['angle']]
+    RKNEE_angle_y = [item[1] for item in RKNEE['angle']]
+    RKNEE_angle_z = [item[2] for item in RKNEE['angle']] 
+    axs[1,1].plot(t,RKNEE_angle_x,t,RKNEE_angle_y,t,RKNEE_angle_z)
+    axs[1,1].legend(['Flex/Ext','Abd/Add','Ex/Int Rotation'])
+    axs[1,1].set_ylabel('Right Knee')
+
+
+    # ANKLe Joint
+    LANK = next((obj for obj in result['IK_Result'] if obj['name'] == 'LANK'),  None)
+    RANK = next((obj for obj in result['IK_Result'] if obj['name'] == 'RANK'),  None)
+    LANK_angle_x = [item[0] for item in LANK['angle']]
+    LANK_angle_y = [item[1] for item in LANK['angle']]
+    LANK_angle_z = [item[2] for item in LANK['angle']]
+    axs[2,0].plot(t,LANK_angle_x,t,LANK_angle_y,t,LANK_angle_z)
+    axs[2,0].legend(['Flex/Ext','Abd/Add','Ex/Int Rotation'])
+    axs[2,0].set_ylabel('Left Ankle')
+
+    RANK_angle_x = [item[0] for item in RANK['angle']]
+    RANK_angle_y = [item[1] for item in RANK['angle']]
+    RANK_angle_z = [item[2] for item in RANK['angle']] 
+    axs[2,1].plot(t,RANK_angle_x,t,RANK_angle_y,t,RANK_angle_z)
+    axs[2,1].legend(['Flex/Ext','Abd/Add','Ex/Int Rotation'])
+    axs[2,1].set_ylabel('right Ankle')
+   
+
+    plt.show()    
+
+```
+## Inverse Kinematic Graph
+![alt text](http://url/to/img.png)
 
 
 ```diff
