@@ -277,7 +277,8 @@ Markers_label = [('LASI','LASI'), # (Fixed label , your label in c3d file)
 
 
 #pyc3dtools.IKPiG(TOKEN, Static Trial,Dynamic Trial, Markers_label,Anthropometry,[start Frame, end Frame] *Optional)
-result =  pyc3dtools.IKPiG(TOKEN,'Cal 01.C3D','Walking 01.C3D',Markers_label,Anthropometry)
+result =  pyc3dtools.IKPiG(TOKEN,'Cal 01.C3D','Walking 01.C3D',Markers_label,Anthropometry,['50','300']) # ['50','300']  => just it will solve the data between the 50th up to 300th frame
+#result =  pyc3dtools.IKPiG(TOKEN,static_file_name,dynamic_file_name,Markers_label,Anthropometry) #it will consider the all of frames
 
 
 
