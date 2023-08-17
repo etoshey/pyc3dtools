@@ -76,7 +76,7 @@ def getTRCMot(Token, file_path, des_path):
 
 
 def IKPiG(Token, static_file_path, dynamic_file_path, marker_lbl, Anthropometry,zoon=['0','0']):
-    API_URL = "http://c3dtools.com/API/IKPiG"
+    API_URL = "https://c3dtools.com/API/IKPiG"
 
     data = {"api_key": Token, "Marker_LBL": marker_lbl, "Anthropometry": Anthropometry , 'trim' : zoon}
 
