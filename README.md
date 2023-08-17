@@ -241,7 +241,10 @@ if result['Status'] == 'Success':
 
 
 # Inverse Kinematic : Plug-in Gait
-By this API can compute the joint's kinematics. Just pass a static trial, a dynamic trial and anthropometry data of your subject.
+![C3Dtools](https://github.com/etoshey/pyc3dtools/blob/8593fd1ee0fad685b24e4a8a8d1aef83f1ea71a6/Test/diagram.png)
+
+This API can compute the joint's kinematics. Just pass a static trial, a dynamic trial, and anthropometry data of your subject.
+
 
 ```python
 import pyc3dtools
