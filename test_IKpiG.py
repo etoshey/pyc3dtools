@@ -1,6 +1,7 @@
 import pyc3dtools
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 TOKEN = "YOUR TOKEN"
 
@@ -93,4 +94,11 @@ if result['Status'] == 'Success':
 
     plt.show()
 
-    a=0
+else:
+    print(result['Status'])
+
+
+
+
+
+os.system('pause')
