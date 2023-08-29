@@ -6,7 +6,7 @@
 % parameters { token , labels , Anthropometry , staic file, dynamic file }
 
 uri = 'https://c3dtools.com/API/IKPiG';
-token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjU4NTM0NDg3NzQ2MDM0IiwiaWF0IjoxNjc5OTE4NDY1LCJleHAiOjE2Nzk5MjIwNjV9.IDZAmMoneWqw6rjlmpl15ZpjbgDjtQFhYwI_iy1uX7E";
+token = "Your_Token";
 
 % LASI,your lbl/RASI,your lbl/....
 Markers_label = 'LASI,LASI/RASI,RASI/LPSI,LPSI/RPSI,RPSI/LTHI,LTHI/RTHI,RTHI/LKNE,LKNE/RKNE,RKNE/LTIB,LTIB/RTIB,RTIB/LANK,LANK/RANK,RANK/LHEE,LHEE/RHEE,RHEE/LTOE,LTOE/RTOE,RTOE';
