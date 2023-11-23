@@ -216,3 +216,57 @@ def GenerateOutput(result):
         "Units": Markers_Units,
         "Coordinate system": [Markers_XSCREEN, Markers_YSCREEN],
     }
+
+
+
+
+def getTRCMot_qtm(Token, file_path,callback):
+
+    print('uploading...')
+    API_URL = "https://c3dtools.com/API/getOpenSimData"
+    data = {"api_key": Token}
+    file_name = os.path.basename(file_path)
+
+    file_size = os.stat(file_path).st_size
+    file =  open(file_path, "rb")      
+    resp = requests.post(
+        url=API_URL, stream=True, data=data, files={"upload_file": file}
+    )
+
+    dest_path = os.path.split(file_path)[0] + '\\'
+
+    try:
+        result = json.loads(resp.text)       
+
+        if "error_msg" in result:
+            return({"error": result["error_msg"], "Status": "Failed"})
+        else:
+            # write to file\
+            if "mot" in result:
+                motFile = open(dest_path+file_name[:-3] + "mot", "w")
+                motFile.writelines(result["mot"]["h1"])
+                motFile.writelines(result["mot"]["h2"])
+                for d in result["mot"]["data"]:
+                    motFile.writelines(d)
+                motFile.close()
+
+            if "trc" in result:
+                trcFile = open(dest_path+file_name[:-3] + "trc", "w")
+                trcFile.writelines(result["trc"]["h1"])
+                trcFile.writelines(result["trc"]["h2"])
+                trcFile.writelines(result["trc"]["h3"])
+                trcFile.writelines(result["trc"]["h4"])
+                trcFile.writelines(result["trc"]["h5"])
+                for d in result["trc"]["data"]:
+                    trcFile.writelines(d)
+                trcFile.close()
+
+            return ({"Status": "Done"})            
+
+    except Exception as e:
+        return({"Status": "Failed", "error": e})
+
+
+
+   
+
