@@ -1,21 +1,13 @@
 import os
-import requests,json
 import pyc3dtools
 import threading
-import time
-import progressbar
-
 import qtm
 
-TOKEN = ""
-
+# Public Token
+TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2VlNDFlY2RmODE2MDk0MTI0ZTEyNjIiLCJpYXQiOjE2ODc0MDk1ODEsImV4cCI6MTY4NzQxMzE4MX0.KwuGt4MNbuR2QcwMy4clRB8waVy0anBcdmDDyCF3y3c"
 
 
 menu_id = qtm.gui.insert_menu_submenu(None,"C3Dtools")
-
-
-def login():
-    print("OK!!")
 
 
 def getAllC3DFiles():
@@ -33,22 +25,22 @@ def getAllC3DFiles():
 
 
 
-def C3D2TRC():
-    print("111111K!!")
+def C3D2TRC():   
     files = getAllC3DFiles()
 
-    dest_path = os.path.split(files[0])[0]
-    print(dest_path)
-
-    x = threading.Thread(target=GetTRCMot_func, args=(files,callable,))   
-    x.start()    
+    if len(files)==0:
+        qtm.gui.message.add_message("C3Dtools :: C3D files not found!","", "info")
+    else:
+        x = threading.Thread(target=GetTRCMot_func, args=(files,callback,))
+        x.start()    
 
 
 
 def callback(result):
-    print("result")
+    # TODO :: update UI
+    print('callback')
 
-    print(result)
+
 
 
 
@@ -69,7 +61,7 @@ def GetTRCMot_func(files,callback):
 qtm.gui.add_command("C3D2TRC")
 qtm.gui.set_command_execute_function("C3D2TRC",C3D2TRC)
 
-qtm.gui.insert_menu_button(menu_id,"C3D to trc (Y-Up)","C3D2TRC")
+qtm.gui.insert_menu_button(menu_id,"C3D to Opensim","C3D2TRC")
 
 
 
