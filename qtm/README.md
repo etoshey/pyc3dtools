@@ -14,3 +14,4 @@ Open your QTM project and then export your C3D files to the same folder (the fol
 Next, from the menu click on **C3Dtools > C3D to Opensim**. Now you can see messages in the Messages box. According to the file size it might take a while because this script uses C3Dtools API and your files will process via C3Dtools web-based services. Finally, you can find the trc and mot files besides the .qtm files.
 ![qtm scripting](https://github.com/etoshey/pyc3dtools/blob/707bf76feae23ac27ba6fec91db65fa4e84df0ca/Test/Capture.JPG)
 
+![qtm scripting](https://github.com/etoshey/pyc3dtools/blob/707bf76feae23ac27ba6fec91db65fa4e84df0ca/Test/Capture.JPG)
