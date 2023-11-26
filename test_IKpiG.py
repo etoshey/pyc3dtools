@@ -5,6 +5,7 @@ import os
 
 TOKEN = "YOUR TOKEN"
 
+
 Anthropometry = [('Left_Leg_Length',800), # mm
                   ('Right_Leg_Length',800),
                   ('Knee_Width',100),
@@ -12,7 +13,7 @@ Anthropometry = [('Left_Leg_Length',800), # mm
                   ('Marker_Radius',14)]
 
 
-Markers_label = [('LASI','LASI'),
+Markers_label = [('LASI','L_ASI'),
                  ('RASI','RASI'),
                  ('LPSI','LPSI'),
                  ('RPSI','RPSI'),
