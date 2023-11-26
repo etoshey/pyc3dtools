@@ -4,7 +4,7 @@ import threading
 import qtm
 
 # Public Token
-TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2VlNDFlY2RmODE2MDk0MTI0ZTEyNjIiLCJpYXQiOjE2ODc0MDk1ODEsImV4cCI6MTY4NzQxMzE4MX0.KwuGt4MNbuR2QcwMy4clRB8waVy0anBcdmDDyCF3y3c"
+TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njc0MTM1MDYzNzY4NTYzIiwiaWF0IjoxNzAwOTk0MjY2LCJleHAiOjE3MDA5OTc4NjZ9.g18Ch69qRYe2MMcT0n7W3DHOeSnNXi8iF__GdeUQ1a0"
 
 
 menu_id = qtm.gui.insert_menu_submenu(None,"C3Dtools")
