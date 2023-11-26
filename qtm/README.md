@@ -1,4 +1,4 @@
-# Qualisys Python Scripting 
+# Qualisys Scripting : C3Dtools
 If you are a QTM user, you can use this script to convert your c3d files to trc and mot files that are compatible with the Opensim
 
 # Installation
